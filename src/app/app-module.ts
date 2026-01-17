@@ -4,16 +4,29 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { ProductList } from './components/product-list/product-list';
-import { provideHttpClient } from '@angular/common/http'
+import { provideHttpClient } from '@angular/common/http';
+
+import { Routes, RouterModule } from '@angular/router';
+import { ProductCategoryMenu } from './components/product-category-menu/product-category-menu';
+
+const routes: Routes = [
+  { path: 'category/:id', component: ProductList},
+  { path: 'category', component: ProductList},
+  { path: 'products', component: ProductList},
+  { path: '', redirectTo: '/products', pathMatch: 'full'},
+  { path: '**', redirectTo: '/products', pathMatch: 'full'},
+]
 
 @NgModule({
   declarations: [
     App,
-    ProductList
+    ProductList,
+    ProductCategoryMenu
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
